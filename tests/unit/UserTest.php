@@ -4,13 +4,20 @@ use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
+
+    protected $user;
+
+    public function setUp()
+    {
+        $this->user = new \App\Models\User;
+    }
+
+
     public function testThatWeCanGetTheFirstName()
     {
-        $user = new \App\Models\User;
+        $this->user->setFirstName('Billy');
 
-        $user->setFirstName('Billy');
-
-        $this->assertEquals($user->getFirstName(), 'Billy');
+        $this->assertEquals($this->user->getFirstName(), 'Billy');
     }   
 
     public function testThatWeCanGetTheLastName()
