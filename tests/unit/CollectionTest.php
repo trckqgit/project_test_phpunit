@@ -56,15 +56,27 @@ class CollectionTest extends TestCase
         $this->assertInstanceOf(ArrayIterator::class, $collection->getIterator());
     }
 
-    public function test_collection_can_be_merged_with_another_collection(){
+    public function test_collection_can_be_merged_with_another_collection()
+    {
         
         $collection1 = new Collection(['one','two']);
         $collection2 = new Collection(['three','four','five']);
 
-        $newCollection = $collection1->merge($collection2);
+        $collection1->merge($collection2);
 
-        $this->assertCount(5, $newCollection->get());
-        $this->assertEquals(5, $newCollection->count());
+        $this->assertCount(5, $collection1->get());
+        $this->assertEquals(5, $collection1->count());
+    }
+
+    public function test_can_add_to_extisting_collection()
+    {
+        $collection = new Collection(['one','two']);
+        $collection->add(['three']);
+
+        $this->assertEquals(3, $collection->count());
+        $this->assertCount(3, $collection->get());
+
+
     }
 }
 ?>
