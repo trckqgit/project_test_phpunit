@@ -53,8 +53,18 @@ class CollectionTest extends TestCase
         }
 
         $this->assertCount(3, $items);
+        $this->assertInstanceOf(ArrayIterator::class, $collection->getIterator());
+    }
 
+    public function test_collection_can_be_merged_with_another_collection(){
         
+        $collection1 = new Collection(['one','two']);
+        $collection2 = new Collection(['three','four','five']);
+
+        $newCollection = $collection1->merge($collection2);
+
+        $this->assertCount(5, $newCollection->get());
+        $this->assertEquals(5, $newCollection->count());
     }
 }
 ?>
