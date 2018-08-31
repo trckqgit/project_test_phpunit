@@ -75,7 +75,30 @@ class CollectionTest extends TestCase
 
         $this->assertEquals(3, $collection->count());
         $this->assertCount(3, $collection->get());
+    }
 
+    public function test_returns_json_encoded_items()
+    {
+        $collection = new Collection([
+            ['username' => 'alex'],
+            ['username' => 'billy']
+        ]);
+
+        $this->assertInternalType('string', $collection->toJson());
+        $this->assertEquals('[{"username":"alex"},{"username":"billy"}]', $collection->toJson());
+    }
+
+    public function test_json_enconding_a_collection_object_returns_json()
+    {
+        $collection = new Collection([
+            ['username' => 'alex'],
+            ['username' => 'billy']
+        ]);
+
+        $encoded = json_encode($collection);
+
+        $this->assertInternalType('string', $encoded);
+        $this->assertEquals('[{"username":"alex"},{"username":"billy"}]', $encoded);
 
     }
 }
