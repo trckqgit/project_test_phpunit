@@ -4,16 +4,8 @@ namespace App\Calculator;
 use App\Calculator\Exceptions\NoOperandsException;
 
 //refatored to add 'implements OperationInterface' after creating that interface
-class Addition implements OperationInterface
-{
-    protected $operands;
-
-    public function setOperands(array $operands)
-    {
-        $this->operands = $operands;
-    }
-
-    
+class Addition extends OperationAbstract implements OperationInterface
+{  
     public function calculate()
     {
 
